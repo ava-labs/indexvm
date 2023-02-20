@@ -3,6 +3,8 @@
 </p>
 <p align="center">
   The Context Layer of the Decentralized Web
+  <br>
+  <a href="https://github.com/ava-labs/hypersdk"><em>Powered by the HyperSDK</em></a>
 </p>
 <p align="center">
   <a href="https://github.com/ava-labs/indexvm/actions/workflows/unit-tests.yml"><img src="https://github.com/ava-labs/indexvm/actions/workflows/unit-tests.yml/badge.svg" /></a>
