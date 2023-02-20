@@ -843,5 +843,6 @@ func awaitHealthy(cli runner_sdk.Client) {
 			gomega.Ω(submit(context.Background())).Should(gomega.BeNil())
 			continue
 		}
+		return
 	}
 }
