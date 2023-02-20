@@ -542,10 +542,11 @@ var _ = ginkgo.Describe("[Transfer]", func() {
 	})
 
 	ginkgo.It("accepts transaction after it bootstraps", func() {
+		other, err := crypto.GeneratePrivateKey()
+		gomega.Ω(err).Should(gomega.BeNil())
+
 		for {
 			// Generate transaction
-			other, err := crypto.GeneratePrivateKey()
-			gomega.Ω(err).Should(gomega.BeNil())
 			submit, tx, _, err := syncClient.GenerateTransaction(
 				context.Background(),
 				&actions.Transfer{
@@ -655,10 +656,11 @@ var _ = ginkgo.Describe("[Transfer]", func() {
 	})
 
 	ginkgo.It("accepts transaction after state sync", func() {
+		other, err := crypto.GeneratePrivateKey()
+		gomega.Ω(err).Should(gomega.BeNil())
+
 		for {
 			// Generate transaction
-			other, err := crypto.GeneratePrivateKey()
-			gomega.Ω(err).Should(gomega.BeNil())
 			submit, tx, _, err := syncClient.GenerateTransaction(
 				context.Background(),
 				&actions.Transfer{
