@@ -4,8 +4,8 @@ go 1.19
 
 require (
 	github.com/ava-labs/avalanchego v1.9.8
-	github.com/ava-labs/hypersdk v0.0.0-00010101000000-000000000000
-	github.com/ava-labs/indexvm v0.0.0-00010101000000-000000000000
+	github.com/ava-labs/hypersdk v0.0.0-20230220192118-d5fb6880f537
+	github.com/ava-labs/indexvm v0.0.0-20230220193510-db59209b4038
 	github.com/briandowns/spinner v1.19.0
 	github.com/gorilla/rpc v1.2.0
 	github.com/hasura/go-graphql-client v0.8.1
@@ -252,7 +252,3 @@ require (
 	lukechampine.com/blake3 v1.1.7 // indirect
 	nhooyr.io/websocket v1.8.7 // indirect
 )
-
-replace github.com/ava-labs/indexvm => ../
-
-replace github.com/ava-labs/hypersdk => ../../hypersdk

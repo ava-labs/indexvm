@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/ava-labs/avalanche-network-runner v1.3.5
 	github.com/ava-labs/avalanchego v1.9.8
+	github.com/ava-labs/hypersdk v0.0.0-20230220192118-d5fb6880f537
 	github.com/fatih/color v1.13.0
 	github.com/onsi/ginkgo/v2 v2.6.1
 	github.com/onsi/gomega v1.24.2
@@ -20,7 +21,6 @@ require (
 	github.com/NYTimes/gziphandler v1.1.1 // indirect
 	github.com/VictoriaMetrics/fastcache v1.10.0 // indirect
 	github.com/ava-labs/coreth v0.11.7-rc.0 // indirect
-	github.com/ava-labs/hypersdk v0.0.0-20230220192118-d5fb6880f537 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/btcsuite/btcd/btcec/v2 v2.3.2 // indirect
 	github.com/btcsuite/btcd/btcutil v1.1.3 // indirect
