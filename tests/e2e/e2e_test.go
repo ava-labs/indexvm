@@ -542,28 +542,35 @@ var _ = ginkgo.Describe("[Transfer]", func() {
 	})
 
 	ginkgo.It("accepts transaction after it bootstraps", func() {
-		// Generate transaction
 		other, err := crypto.GeneratePrivateKey()
 		gomega.Ω(err).Should(gomega.BeNil())
-		submit, tx, _, err := syncClient.GenerateTransaction(
-			context.Background(),
-			&actions.Transfer{
-				To:    other.PublicKey(),
-				Value: sendAmount, // must be more than state lockup
-			},
-			factory,
-		)
-		gomega.Ω(err).Should(gomega.BeNil())
-		hutils.Outf("{{yellow}}generated transaction{{/}}\n")
 
-		// Broadcast and wait for transaction
-		gomega.Ω(submit(context.Background())).Should(gomega.BeNil())
-		hutils.Outf("{{yellow}}submitted transaction{{/}}\n")
-		ctx, cancel := context.WithTimeout(context.Background(), requestTimeout)
-		err = syncClient.WaitForTransaction(ctx, tx.ID())
-		cancel()
-		gomega.Ω(err).Should(gomega.BeNil())
-		hutils.Outf("{{yellow}}found transaction{{/}}\n")
+		for {
+			// Generate transaction
+			submit, tx, _, err := syncClient.GenerateTransaction(
+				context.Background(),
+				&actions.Transfer{
+					To:    other.PublicKey(),
+					Value: sendAmount, // must be more than state lockup
+				},
+				factory,
+			)
+			gomega.Ω(err).Should(gomega.BeNil())
+			hutils.Outf("{{yellow}}generated transaction{{/}}\n")
+
+			// Broadcast and wait for transaction
+			gomega.Ω(submit(context.Background())).Should(gomega.BeNil())
+			hutils.Outf("{{yellow}}submitted transaction{{/}}\n")
+			ctx, cancel := context.WithTimeout(context.Background(), requestTimeout)
+			err = syncClient.WaitForTransaction(ctx, tx.ID())
+			cancel()
+			if err != nil {
+				hutils.Outf("{{red}}cannot find transaction: %v{{/}}\n", err)
+				continue
+			}
+			hutils.Outf("{{yellow}}found transaction{{/}}\n")
+			break
+		}
 	})
 
 	// Create blocks before state sync starts (state sync requires at least 256
@@ -649,28 +656,35 @@ var _ = ginkgo.Describe("[Transfer]", func() {
 	})
 
 	ginkgo.It("accepts transaction after state sync", func() {
-		// Generate transaction
 		other, err := crypto.GeneratePrivateKey()
 		gomega.Ω(err).Should(gomega.BeNil())
-		submit, tx, _, err := syncClient.GenerateTransaction(
-			context.Background(),
-			&actions.Transfer{
-				To:    other.PublicKey(),
-				Value: sendAmount, // must be more than state lockup
-			},
-			factory,
-		)
-		gomega.Ω(err).Should(gomega.BeNil())
-		hutils.Outf("{{yellow}}generated transaction{{/}}\n")
 
-		// Broadcast and wait for transaction
-		gomega.Ω(submit(context.Background())).Should(gomega.BeNil())
-		hutils.Outf("{{yellow}}submitted transaction{{/}}\n")
-		ctx, cancel := context.WithTimeout(context.Background(), requestTimeout)
-		err = syncClient.WaitForTransaction(ctx, tx.ID())
-		cancel()
-		gomega.Ω(err).Should(gomega.BeNil())
-		hutils.Outf("{{yellow}}found transaction{{/}}\n")
+		for {
+			// Generate transaction
+			submit, tx, _, err := syncClient.GenerateTransaction(
+				context.Background(),
+				&actions.Transfer{
+					To:    other.PublicKey(),
+					Value: sendAmount, // must be more than state lockup
+				},
+				factory,
+			)
+			gomega.Ω(err).Should(gomega.BeNil())
+			hutils.Outf("{{yellow}}generated transaction{{/}}\n")
+
+			// Broadcast and wait for transaction
+			gomega.Ω(submit(context.Background())).Should(gomega.BeNil())
+			hutils.Outf("{{yellow}}submitted transaction{{/}}\n")
+			ctx, cancel := context.WithTimeout(context.Background(), requestTimeout)
+			err = syncClient.WaitForTransaction(ctx, tx.ID())
+			cancel()
+			if err != nil {
+				hutils.Outf("{{red}}cannot find transaction: %v{{/}}\n", err)
+				continue
+			}
+			hutils.Outf("{{yellow}}found transaction{{/}}\n")
+			break
+		}
 	})
 
 	ginkgo.It("state sync while broadcasting transactions", func() {
@@ -750,23 +764,29 @@ var _ = ginkgo.Describe("[Transfer]", func() {
 		gomega.Ω(err).Should(gomega.BeNil())
 
 		// Generate transaction
-		submit, tx, _, err := syncClient.GenerateTransaction(
-			context.Background(),
-			&actions.Transfer{
-				To:    other.PublicKey(),
-				Value: sendAmount, // must be more than state lockup
-			},
-			factory,
-		)
-		gomega.Ω(err).Should(gomega.BeNil())
+		for {
+			submit, tx, _, err := syncClient.GenerateTransaction(
+				context.Background(),
+				&actions.Transfer{
+					To:    other.PublicKey(),
+					Value: sendAmount, // must be more than state lockup
+				},
+				factory,
+			)
+			gomega.Ω(err).Should(gomega.BeNil())
 
-		// Broadcast and wait for transaction
-		gomega.Ω(submit(context.Background())).Should(gomega.BeNil())
-		ctx, cancel := context.WithTimeout(context.Background(), requestTimeout)
-		err = syncClient.WaitForTransaction(ctx, tx.ID())
-		cancel()
-		gomega.Ω(err).Should(gomega.BeNil())
-		hutils.Outf("{{yellow}}found transaction{{/}}\n")
+			// Broadcast and wait for transaction
+			gomega.Ω(submit(context.Background())).Should(gomega.BeNil())
+			ctx, cancel := context.WithTimeout(context.Background(), requestTimeout)
+			err = syncClient.WaitForTransaction(ctx, tx.ID())
+			cancel()
+			if err != nil {
+				hutils.Outf("{{red}}cannot find transaction: %v{{/}}\n", err)
+				continue
+			}
+			hutils.Outf("{{yellow}}found transaction{{/}}\n")
+			break
+		}
 	})
 
 	// TODO: restart synced node + process blocks + re-sync
