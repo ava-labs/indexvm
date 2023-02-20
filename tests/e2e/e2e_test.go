@@ -142,8 +142,9 @@ func init() {
 }
 
 const (
-	modeTest = "test"
-	modeRun  = "run"
+	modeTest     = "test"
+	modeFullTest = "full-test" // runs state sync
+	modeRun      = "run"
 )
 
 var (
@@ -152,7 +153,8 @@ var (
 )
 
 var _ = ginkgo.BeforeSuite(func() {
-	gomega.Expect(mode).Should(gomega.Or(gomega.Equal("test"), gomega.Equal("run")))
+	gomega.Expect(mode).
+		Should(gomega.Or(gomega.Equal("test"), gomega.Equal("full-test"), gomega.Equal("run")))
 	logLevel, err := logging.ToLevel(networkRunnerLogLevel)
 	gomega.Expect(err).Should(gomega.BeNil())
 	logFactory := logging.NewFactory(logging.Config{
@@ -322,7 +324,7 @@ type instance struct {
 
 var _ = ginkgo.AfterSuite(func() {
 	switch mode {
-	case modeTest:
+	case modeTest, modeFullTest:
 		hutils.Outf("{{red}}shutting down cluster{{/}}\n")
 		ctx, cancel := context.WithTimeout(context.Background(), 2*time.Minute)
 		_, err := cli.Stop(ctx)
@@ -449,6 +451,12 @@ var _ = ginkgo.Describe("[Transfer]", func() {
 			}
 		})
 	})
+
+	switch mode {
+	case modeTest:
+		hutils.Outf("{{yellow}}skipping bootstrap and state sync tests{{/}}\n")
+		return
+	}
 
 	// TODO: move everything below here to "dummyvm" implementation in
 	// `hypersdk`

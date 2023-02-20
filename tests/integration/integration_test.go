@@ -1427,6 +1427,7 @@ var _ = ginkgo.Describe("[Tx Processing]", func() {
 
 	ginkgo.It("waits for async acceptor to catch up", func() {
 		// TODO: make this more robust
+		// (https://github.com/ava-labs/hypersdk/issues/7)
 		time.Sleep(5 * time.Second)
 	})
 })

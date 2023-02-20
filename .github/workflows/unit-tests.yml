@@ -33,4 +33,4 @@ jobs:
         shell: bash
         run: scripts/run.sh
         env:
-          E2E: true
+          MODE: "test"
