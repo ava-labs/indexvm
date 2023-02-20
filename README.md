@@ -413,3 +413,5 @@ out on the Avalanche Discord._
   on top of the `hypersdk` networking layer
 * Add support for sending assets between different `indexvms` (blocked on
   `hypersdk` support for Avalanche Warp Messaging)
+
+  test
