@@ -6,6 +6,7 @@
 </p>
 <p align="center">
   <a href="https://github.com/ava-labs/indexvm/actions/workflows/unit-tests.yml"><img src="https://github.com/ava-labs/indexvm/actions/workflows/unit-tests.yml/badge.svg" /></a>
+  <a href="https://github.com/ava-labs/indexvm/actions/workflows/sync-tests.yml"><img src="https://github.com/ava-labs/indexvm/actions/workflows/sync-tests.yml/badge.svg" /></a>
   <a href="https://github.com/ava-labs/indexvm/actions/workflows/static-analysis.yml"><img src="https://github.com/ava-labs/indexvm/actions/workflows/static-analysis.yml/badge.svg" /></a>
 </p>
 
