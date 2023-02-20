@@ -142,8 +142,9 @@ func init() {
 }
 
 const (
-	modeTest = "test"
-	modeRun  = "run"
+	modeTest     = "test"
+	modeFullTest = "full-test" // runs state sync
+	modeRun      = "run"
 )
 
 var (
@@ -152,7 +153,8 @@ var (
 )
 
 var _ = ginkgo.BeforeSuite(func() {
-	gomega.Expect(mode).Should(gomega.Or(gomega.Equal("test"), gomega.Equal("run")))
+	gomega.Expect(mode).
+		Should(gomega.Or(gomega.Equal("test"), gomega.Equal("full-test"), gomega.Equal("run")))
 	logLevel, err := logging.ToLevel(networkRunnerLogLevel)
 	gomega.Expect(err).Should(gomega.BeNil())
 	logFactory := logging.NewFactory(logging.Config{
@@ -322,7 +324,7 @@ type instance struct {
 
 var _ = ginkgo.AfterSuite(func() {
 	switch mode {
-	case modeTest:
+	case modeTest, modeFullTest:
 		hutils.Outf("{{red}}shutting down cluster{{/}}\n")
 		ctx, cancel := context.WithTimeout(context.Background(), 2*time.Minute)
 		_, err := cli.Stop(ctx)
@@ -449,6 +451,12 @@ var _ = ginkgo.Describe("[Transfer]", func() {
 			}
 		})
 	})
+
+	switch mode {
+	case modeTest:
+		hutils.Outf("{{yellow}}skipping bootstrap and state sync tests{{/}}\n")
+		return
+	}
 
 	// TODO: move everything below here to "dummyvm" implementation in
 	// `hypersdk`
@@ -783,11 +791,11 @@ func (ci clusterInfo) Save(p string) error {
 	return os.WriteFile(p, ob, fsModeWrite)
 }
 
-func awaitHealthy(cli runner_sdk.Client) *rpcpb.ClusterInfo {
+func awaitHealthy(cli runner_sdk.Client) {
 	for {
 		time.Sleep(healthPollInterval)
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-		resp, err := cli.Health(ctx)
+		_, err := cli.Health(ctx)
 		cancel() // by default, health will wait to return until healthy
 		if err != nil {
 			hutils.Outf(
@@ -815,6 +823,5 @@ func awaitHealthy(cli runner_sdk.Client) *rpcpb.ClusterInfo {
 			gomega.Ω(submit(context.Background())).Should(gomega.BeNil())
 			continue
 		}
-		return resp.ClusterInfo
 	}
 }

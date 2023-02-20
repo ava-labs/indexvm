@@ -6,6 +6,7 @@
 </p>
 <p align="center">
   <a href="https://github.com/ava-labs/indexvm/actions/workflows/unit-tests.yml"><img src="https://github.com/ava-labs/indexvm/actions/workflows/unit-tests.yml/badge.svg" /></a>
+  <a href="https://github.com/ava-labs/indexvm/actions/workflows/sync-tests.yml"><img src="https://github.com/ava-labs/indexvm/actions/workflows/sync-tests.yml/badge.svg" /></a>
   <a href="https://github.com/ava-labs/indexvm/actions/workflows/static-analysis.yml"><img src="https://github.com/ava-labs/indexvm/actions/workflows/static-analysis.yml/badge.svg" /></a>
 </p>
 
@@ -342,11 +343,19 @@ interactions and ensure the outcome of those interactions is expected.
 ```
 
 ### E2E Test
-The `indexvm` E2E test spins up 5 AvalancheGo nodes and state syncs new nodes
-while thousands of blocks are being processed concurrently.
+The `indexvm` E2E test spins up 5 AvalancheGo nodes and performs a simple
+transfer.
 
 ```bash
-E2E=true ./scripts/run.sh
+MODE=test ./scripts/run.sh
+```
+
+If you want to a full suite of sync tests (state syncs new nodes
+while thousands of blocks are being processed concurrently), run the following
+command:
+
+```bash
+MODE=full-test ./scripts/run.sh
 ```
 
 ### Local Network

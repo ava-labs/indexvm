@@ -85,6 +85,10 @@ github.com/armon/go-radix v0.0.0-20180808171621-7fddfc383310/go.mod h1:ufUuZ+zHj
 github.com/aryann/difflib v0.0.0-20170710044230-e206f873d14a/go.mod h1:DAHtR1m6lCRdSC2Tm3DSWRPvIPr6xNKyeHdqDQSQT+A=
 github.com/ava-labs/avalanchego v1.9.8 h1:5SHKqkWpBn9Pqxg2qpzDZ7FQqYFapzaCZwArapBdqAA=
 github.com/ava-labs/avalanchego v1.9.8/go.mod h1:t9+R55TgRJxYCekRf/EicIjHBeeEQT04TQxpaF98+yM=
+github.com/ava-labs/hypersdk v0.0.0-20230220192118-d5fb6880f537 h1:+zRZ9jPbb5f7XTlEg1RQWj5PNk9lFqjGKsxlOFkpU5U=
+github.com/ava-labs/hypersdk v0.0.0-20230220192118-d5fb6880f537/go.mod h1:RofBf7rbnRV6phWDHaLpwNabvGq31h79R0BTfpIv2xk=
+github.com/ava-labs/indexvm v0.0.0-20230220193510-db59209b4038 h1:FRQM7gxI7u/kxbhy/Ei3DB1Ixdh7igNayFbXdJgvfCo=
+github.com/ava-labs/indexvm v0.0.0-20230220193510-db59209b4038/go.mod h1:ciye+N8SziWrCNr0l+EFi5TqgbkWzmHElqo2qysF5vk=
 github.com/aws/aws-lambda-go v1.13.3/go.mod h1:4UKl9IzQMoD+QF79YdCuzCwp8VbmG4VAQwij/eHl5CU=
 github.com/aws/aws-sdk-go v1.27.0/go.mod h1:KmX6BPdI08NWTb3/sm4ZGu5ShLoqVDhKgpiN924inxo=
 github.com/aws/aws-sdk-go-v2 v0.18.0/go.mod h1:JWVYvqSMppoMJC0x5wdwiImzgXTI9FuZwxzkQq9wy+g=

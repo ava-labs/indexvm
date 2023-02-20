@@ -11,7 +11,7 @@ set -e
 export CGO_CFLAGS="-O -D__BLST_PORTABLE__"
 
 # to run E2E tests (terminates cluster afterwards)
-# E2E=true ./scripts/run.sh
+# MODE=test ./scripts/run.sh
 if ! [[ "$0" =~ scripts/run.sh ]]; then
   echo "must be run from repository root"
   exit 255
@@ -21,9 +21,7 @@ VERSION=1.9.8
 MODE=${MODE:-run}
 LOGLEVEL=${LOGLEVEL:-info}
 STATESYNC_DELAY=${STATESYNC_DELAY:-0}
-E2E=${E2E:-false}
-if [[ ${E2E} == true ]]; then
-  MODE="test"
+if [[ ${MODE} != "run" ]]; then
   LOGLEVEL="debug"
   STATESYNC_DELAY=500000000 # 500ms
 fi
