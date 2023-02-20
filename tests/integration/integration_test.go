@@ -1424,6 +1424,11 @@ var _ = ginkgo.Describe("[Tx Processing]", func() {
 		result = results[0]
 		gomega.Ω(result.Success).Should(gomega.BeTrue())
 	})
+
+	ginkgo.It("waits for async acceptor to catch up", func() {
+		// TODO: make this more robust
+		time.Sleep(5 * time.Second)
+	})
 })
 
 func expectBlk(i instance) func() []*chain.Result {
