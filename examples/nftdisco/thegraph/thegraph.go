@@ -322,6 +322,7 @@ func (q *NFTQuery) process(
 				len(contract.NFTs),
 			)
 		} else {
+			// TODO: broadcast NFTs here instead of waiting for batch to complete
 			validNFTs[contract.ID] = nfts
 			fmt.Printf("proccessing %s completed successfully (valid=%d repeat=%d)\n", contract.ID, len(nfts), repeats)
 		}
