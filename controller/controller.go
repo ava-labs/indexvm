@@ -138,6 +138,8 @@ func (c *Controller) Initialize(
 		gossip = gossiper.NewManual(inner)
 	} else {
 		build = builder.NewTime(inner, builder.DefaultTimeConfig())
+		gcfg := gossiper.DefaultProposerConfig()
+		gcfg.BuildProposerDiff = 1 // don't gossip if producing the next block
 		gossip = gossiper.NewProposer(inner, gossiper.DefaultProposerConfig())
 	}
 
