@@ -22,7 +22,6 @@ MODE=${MODE:-run}
 LOGLEVEL=${LOGLEVEL:-info}
 STATESYNC_DELAY=${STATESYNC_DELAY:-0}
 if [[ ${MODE} != "run" ]]; then
-  LOGLEVEL="debug"
   STATESYNC_DELAY=500000000 # 500ms
 fi
 
