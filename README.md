@@ -3,12 +3,14 @@
 </p>
 <p align="center">
   The Context Layer of the Decentralized Web
-  <br>
-  <a href="https://github.com/ava-labs/hypersdk"><em>Powered by the HyperSDK</em></a>
 </p>
 <p align="center">
   <a href="https://github.com/ava-labs/indexvm/actions/workflows/unit-tests.yml"><img src="https://github.com/ava-labs/indexvm/actions/workflows/unit-tests.yml/badge.svg" /></a>
+  <a href="https://github.com/ava-labs/indexvm/actions/workflows/sync-tests.yml"><img src="https://github.com/ava-labs/indexvm/actions/workflows/sync-tests.yml/badge.svg" /></a>
   <a href="https://github.com/ava-labs/indexvm/actions/workflows/static-analysis.yml"><img src="https://github.com/ava-labs/indexvm/actions/workflows/static-analysis.yml/badge.svg" /></a>
+</p>
+<p align="center">
+  <a href="https://github.com/ava-labs/hypersdk"><em>Powered by the HyperSDK</em></a>
 </p>
 
 The `indexvm` is dedicated to increasing the usefulness of the world's
